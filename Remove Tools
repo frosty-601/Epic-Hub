@@ -1,0 +1,4 @@
+local player =
+game.Players.LocalPlayer
+
+player.Backpack:ClearAllChildren()
