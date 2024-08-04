@@ -1,70 +1,64 @@
 local player = game.Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
+-- Create ScreenGui
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = playerGui
 
-local scrollingFrame = Instance.new("ScrollingFrame")
-scrollingFrame.Size = UDim2.new(1, 0, 0, 70)  
-scrollingFrame.Position = UDim2.new(0, 0, 1, -70)  
-scrollingFrame.BackgroundColor3 = Color3.new(0, 0, 0)
-scrollingFrame.BackgroundTransparency = 0.5  
-scrollingFrame.ScrollBarThickness = 8
-scrollingFrame.CanvasSize = UDim2.new(0, 0, 1, 0)
-scrollingFrame.Parent = screenGui
+-- Create Frame for tools
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(1, 0, 0, 70)  -- Full width, height of 70 pixels
+frame.Position = UDim2.new(0, 0, 1, -70)  -- Positioned at the bottom
+frame.BackgroundColor3 = Color3.new(0, 0, 0)
+frame.BackgroundTransparency = 0.5  -- Slightly transparent
+frame.Parent = screenGui
 
+-- Create UIListLayout for horizontal alignment
 local uiListLayout = Instance.new("UIListLayout")
 uiListLayout.FillDirection = Enum.FillDirection.Horizontal
 uiListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Left
 uiListLayout.VerticalAlignment = Enum.VerticalAlignment.Center
-uiListLayout.Padding = UDim.new(0, 5)  
-uiListLayout.Parent = scrollingFrame
+uiListLayout.Padding = UDim.new(0, 5)  -- Space between tools
+uiListLayout.Parent = frame
 
-local function createToolButton(toolName)
+-- Function to create tool buttons
+local function createToolButton(tool)
     local button = Instance.new("ImageButton")
-    button.Size = UDim2.new(0, 50, 0, 50)  
+    button.Size = UDim2.new(0, 60, 0, 60)  -- Size of each tool button
     button.BackgroundColor3 = Color3.new(1, 1, 1)
-    button.BackgroundTransparency = 0.5  
+    button.BackgroundTransparency = 0.5  -- Slightly transparent background
     button.BorderSizePixel = 0
-    button.Name = toolName
-    button.Parent = scrollingFrame
+    button.Name = tool.Name
+    button.Parent = frame
 
     local toolLabel = Instance.new("TextLabel")
-    toolLabel.Text = toolName
-    toolLabel.Size = UDim2.new(1, 0, 1, 0)  
-    toolLabel.BackgroundTransparency = 1  
-    toolLabel.TextColor3 = Color3.new(1, 1, 1)  
-    toolLabel.TextScaled = true  
+    toolLabel.Text = tool.Name
+    toolLabel.Size = UDim2.new(1, 0, 1, 0)  -- Label covers entire button
+    toolLabel.BackgroundTransparency = 1  -- No background
+    toolLabel.TextColor3 = Color3.new(1, 1, 1)  -- White text
+    toolLabel.TextScaled = true  -- Scale text to fit
     toolLabel.Parent = button
 
     button.MouseButton1Click:Connect(function()
-        local characterTool = player.Character:FindFirstChild(toolName)
-        if characterTool then
-            characterTool.Parent = player.Backpack  
+        -- Equip or unequip the tool
+        if tool.Parent == player.Character then
+            tool.Parent = player.Backpack  -- Unequip if already equipped
         else
-            local tool = player.Backpack:FindFirstChild(toolName)
-            if tool then
-                tool.Parent = player.Character  
-            end
+            tool.Parent = player.Character  -- Equip the tool
         end
     end)
 end
 
+-- Create buttons for tools in Backpack
 for _, tool in pairs(player.Backpack:GetChildren()) do
     if tool:IsA("Tool") then
-        createToolButton(tool.Name)
+        createToolButton(tool)
     end
 end
 
+-- Listen for new tools being added to Backpack
 player.Backpack.ChildAdded:Connect(function(tool)
     if tool:IsA("Tool") then
-        createToolButton(tool.Name)
+        createToolButton(tool)
     end
 end)
-
-local function updateCanvasSize()
-    scrollingFrame.CanvasSize = UDim2.new(0, uiListLayout.AbsoluteContentSize.X, 0, 0)
-end
-
-uiListLayout:GetPropertyChangedSignal("AbsoluteContentSize"):Connect(updateCanvasSize)
-updateCanvasSize()
