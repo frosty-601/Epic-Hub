@@ -14,3 +14,25 @@ end)
 local Tab = Window:NewTab("Info")
 local Section = Tab:NewSection("Contact me on discord: NeekoNee2#1915")
 Section:NewLabel("Discord server: https://discord.com/invite/HUmRXxKCF7")
+
+local player = game.Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = playerGui
+
+local toggleButton = Instance.new("ImageButton")
+toggleButton.Size = UDim2.new(0, 50, 0, 50)
+toggleButton.Position = UDim2.new(0.5, -25, 0, 10)
+toggleButton.Image = "rbxassetid://933851151"
+toggleButton.Parent = screenGui
+
+local function toggleIcon()
+    if toggleButton.Image == "rbxassetid://933851151" then
+        toggleButton.Image = "rbxassetid://933851148"
+    else
+        toggleButton.Image = "rbxassetid://933851151"
+    end
+end
+
+toggleButton.MouseButton1Click:Connect(toggleIcon)
