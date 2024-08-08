@@ -11,46 +11,38 @@ end)
 Section:NewButton("Remove Tools (If you want)", "Removes tools from your inventory", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/Epic-Hub/main/Remove%20Tools"))()
 end)
+local Tab = Window:NewTab("Others")
+local Section = Tab:NewSection("Other scripts")
+Section:NewButton("Keyboard", "", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/advxzivhsjjdhxhsidifvsh/mobkeyboard/main/main.txt", true))()
+end)
+Section:NewButton("Dark Dex", "checks the game folder and more..", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Babyhamsta/RBLX_Scripts/main/Universal/BypassedDarkDexV3.lua", true))()
+end)
+Section:NewButton("Arceus Aimbot", "Locks at the nearest player", function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/1Gp9c57U"))()
+end)
+Section:NewButton("Animation logger", "It detects current played animations", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/Alice-Hub/main/Animation%20Logger"))()
+end)
+Section:NewSlider("WalkSpeed", "Change your speed", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
+Section:NewSlider("JumpPower", "Chnages your jump power", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+local Tab = Window:NewTab("Other hubs")
+local Section = Tab:NewSection("Other hubs")
+Section:NewButton("Alice Hub", "By Alice", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/Alice-Hub/main/Script"))()
+end)
+Section:NewButton("Tsb animations", "By Mautiku", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Mautiku/ehh/main/strong%20guest.lua.txt'))()
+end)
 local Tab = Window:NewTab("Info")
 local Section = Tab:NewSection("Contact me on discord: NeekoNee2#1915")
 Section:NewLabel("Discord server: https://discord.com/invite/HUmRXxKCF7")
-
--- Create the toggle button
-local TweenService = game:GetService("TweenService")
-local player = game.Players.LocalPlayer
-local playerGui = player:WaitForChild("PlayerGui")
-
-local screenGui = Instance.new("ScreenGui")
-screenGui.Parent = playerGui
-
-local toggleButton = Instance.new("ImageButton")
-toggleButton.Size = UDim2.new(0, 60, 0, 30)
-toggleButton.Position = UDim2.new(0.5, -30, 0, 10)
-toggleButton.Image = "rbxassetid://933851151"
-toggleButton.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
-toggleButton.BackgroundTransparency = 0.5
-toggleButton.Parent = screenGui
-
-local openTween = TweenService:Create(toggleButton, TweenInfo.new(0.3), {
-    Size = UDim2.new(0, 60, 0, 30),
-    BackgroundColor3 = Color3.fromRGB(0, 255, 0),
-    BackgroundTransparency = 0
-})
-
-local closeTween = TweenService:Create(toggleButton, TweenInfo.new(0.3), {
-    Size = UDim2.new(0, 60, 0, 30),
-    BackgroundColor3 = Color3.fromRGB(200, 200, 200),
-    BackgroundTransparency = 0.5
-})
-
-local function toggleIcon()
-    if toggleButton.Image == "rbxassetid://933851151" then
-        toggleButton.Image = "rbxassetid://933851148"
-        openTween:Play()
-    else
-        toggleButton.Image = "rbxassetid://933851151"
-        closeTween:Play()
-    end
-end
-
-toggleButton.MouseButton1Click:Connect(toggleIcon)
+Section:NewLabel("You can share the script if you want, you have my permission")
+Section:NewKeybind("Toggle UI", "", Enum.KeyCode.E, function()
+	Library:ToggleUI()
+end)
