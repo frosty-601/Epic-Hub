@@ -1,5 +1,12 @@
 local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
 local Window = Library.CreateLib("Epic Hub", "DarkTheme")
+local Tab = Window:NewTab("IMPORTANT")
+local Section = Tab:NewSection("READ BEFORE USING THE SCRIPT")
+Section:NewLabel("You can use on ranked lobby without god")
+Section:NewLabel("its fe on ranked lobby Because if you")
+Section:NewLabel("did god it will be client, if you did")
+Section:NewLabel("KJ moves without god cmd on public its")
+Section:NewLabel("fe but you will get banned instantly")
 local Tab = Window:NewTab("KJ(Client)")
 local Section = Tab:NewSection("If you die using KJ moves you will get banned")
 Section:NewButton("KJ (Tools)", "By Bobcompot", function()
@@ -11,9 +18,7 @@ end)
 Section:NewButton("Remove Tools (If you want)", "Removes tools from your inventory", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/Epic-Hub/main/Remove%20Tools"))()
 end)
-Section:NewLabel("You can use on ranked lobby without god its fe on ranked lobby")
-Section:NewLabel("Because if you did cmd god it will be client if you did KJ moves")
-Section:NewLabel("without god cmd on public its fe but you will get banned instantly")
+Section:NewLabel("READ IMPORTANT BEFORE USING THE SCRIPT")
 local Tab = Window:NewTab("Others")
 local Section = Tab:NewSection("Other scripts")
 Section:NewButton("Keyboard", "", function()
@@ -28,16 +33,42 @@ end)
 Section:NewButton("Animation logger", "It detects current played animations", function()
     loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/Alice-Hub/main/Animation%20Logger"))()
 end)
-Section:NewSlider("WalkSpeed", "Change your speed", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+Section:NewTextBox("WalkSpeed", "Changes your speed", function(value)
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Convert the value from string to number
+    local speed = tonumber(value)
+    
+    -- If the input is a valid number, change the walk speed
+    if speed then
+        humanoid.WalkSpeed = speed
+    else
+        -- Optionally, notify the player if the input is invalid
+        print("Please enter a valid number")
+    end
 end)
-Section:NewSlider("JumpPower", "Chnages your jump power", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+Section:NewTextBox("JumpPower", "Changes your jump power", fucntion()
+    local player = game.Players.LocalPlayer
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:WaitForChild("Humanoid")
+
+    -- Convert the value from string to number
+    local speed = tonumber(value)
+    
+    -- If the input is a valid number, change the walk speed
+    if speed then
+        humanoid.JumpPower = speed
+    else
+        -- Optionally, notify the player if the input is invalid
+        print("Please enter a valid number")
+    end
 end)
 local Tab = Window:NewTab("Other hubs")
 local Section = Tab:NewSection("Other hubs")
 Section:NewButton("Alice Hub", "By Alice", function()
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/Alice-Hub/main/Script"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/frosty-601/AIice-Hub/main/Script"))()
 end)
 Section:NewButton("Tsb animations", "By Mautiku", function()
     loadstring(game:HttpGet('https://raw.githubusercontent.com/Mautiku/ehh/main/strong%20guest.lua.txt'))()
