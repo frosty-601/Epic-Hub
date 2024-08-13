@@ -49,7 +49,7 @@ Section:NewTextBox("WalkSpeed", "Changes your speed", function(value)
         print("Please enter a valid number")
     end
 end)
-Section:NewTextBox("JumpPower", "Changes your jump power", fucntion()
+Section:NewTextBox("JumpPower", "Changes your jump power", fucntion(value)
     local player = game.Players.LocalPlayer
     local character = player.Character or player.CharacterAdded:Wait()
     local humanoid = character:WaitForChild("Humanoid")
