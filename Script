@@ -49,21 +49,21 @@ Section:NewTextBox("WalkSpeed", "Changes your speed", function(value)
         print("Please enter a valid number")
     end
 end)
-Section:NewTextBox("Set Jump Power Increment", "Enter the jump power increment", function(value)
-    local increment = tonumber(value)
+Section:NewTextBox("JumpPower", "Enter the jump power you want", function(value)
+    local newJumpPower = tonumber(value)
     
-    if increment then
+    if newJumpPower then
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoid = character:WaitForChild("Humanoid")
         
-        -- Increment the JumpPower
-        humanoid.JumpPower += increment
+        -- Set the JumpPower directly to the new value
+        humanoid.JumpPower = newJumpPower
         humanoid.UseJumpPower = true
-        print("Jump Power incremented by", increment)
+        print("Jump Power set to", newJumpPower)
     else
         -- Notify the player if the input is invalid
-        print("Please enter a valid number for Jump Power increment")
+        print("Please enter a valid number for Jump Power")
     end
 end)
 local Tab = Window:NewTab("Other hubs")
