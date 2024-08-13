@@ -49,8 +49,21 @@ Section:NewTextBox("WalkSpeed", "Changes your speed", function(value)
         print("Please enter a valid number")
     end
 end)
-Section:NewTextBox("Jump", "", function(s)
-	game.Players.LocalPlayer.character.Humanoid.JumpPower = s
+power input
+Section:NewTextBox("Set Jump Power", "Enter the jump power", function(value)
+    local newJumpPower = tonumber(value)
+    if newJumpPower then
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoid = character:WaitForChild("Humanoid")
+        
+        -- Set the jump power
+        humanoid.JumpPower = newJumpPower
+        print("Jump Power set to", newJumpPower)
+    else
+        -- Notify the player if the input is invalid
+        print("Please enter a valid number for Jump Power")
+    end
 end)
 local Tab = Window:NewTab("Other hubs")
 local Section = Tab:NewSection("Other hubs")
