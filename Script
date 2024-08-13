@@ -49,26 +49,8 @@ Section:NewTextBox("WalkSpeed", "Changes your speed", function(value)
         print("Please enter a valid number")
     end
 end)
-power input
-Section:NewTextBox("Set Jump Power", "Enter the jump power", function(value)
-    local newJumpPower = tonumber(value)
-    
-    if newJumpPower then
-        local player = game.Players.LocalPlayer
-        local character = player.Character or player.CharacterAdded:Wait()
-        local humanoid = character:WaitForChild("Humanoid")
-
-        -- Ensure the JumpPower property is available and update it
-        if humanoid and humanoid:IsA("Humanoid") then
-            humanoid.JumpPower = newJumpPower
-            print("Jump Power set to", newJumpPower)
-        else
-            print("Humanoid not found or is not of type Humanoid")
-        end
-    else
-        -- Notify the player if the input is invalid
-        print("Please enter a valid number for Jump Power")
-    end
+Section:NewSlider("JumpPower", "", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
 end)
 local Tab = Window:NewTab("Other hubs")
 local Section = Tab:NewSection("Other hubs")
