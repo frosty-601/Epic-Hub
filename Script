@@ -52,14 +52,19 @@ end)
 power input
 Section:NewTextBox("Set Jump Power", "Enter the jump power", function(value)
     local newJumpPower = tonumber(value)
+    
     if newJumpPower then
         local player = game.Players.LocalPlayer
         local character = player.Character or player.CharacterAdded:Wait()
         local humanoid = character:WaitForChild("Humanoid")
-        
-        -- Set the jump power
-        humanoid.JumpPower = newJumpPower
-        print("Jump Power set to", newJumpPower)
+
+        -- Ensure the JumpPower property is available and update it
+        if humanoid and humanoid:IsA("Humanoid") then
+            humanoid.JumpPower = newJumpPower
+            print("Jump Power set to", newJumpPower)
+        else
+            print("Humanoid not found or is not of type Humanoid")
+        end
     else
         -- Notify the player if the input is invalid
         print("Please enter a valid number for Jump Power")
