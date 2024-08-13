@@ -49,8 +49,9 @@ Section:NewTextBox("WalkSpeed", "Changes your speed", function(value)
         print("Please enter a valid number")
     end
 end)
-Section:NewSlider("JumpPower", "", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
-    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+Section:NewTextBox("JumpPower", "", function(s)
+    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").JumpPower += s
+    game.Players.LocalPlayer.Character:WaitForChild("Humanoid").UseJumpPower = true
 end)
 local Tab = Window:NewTab("Other hubs")
 local Section = Tab:NewSection("Other hubs")
